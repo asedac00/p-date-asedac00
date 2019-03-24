@@ -76,10 +76,17 @@ public class Date {
 	public void setYear(int year) {
 		this.year = year;
 	}
-
+	/**
+	 * Metodo que te dice cuantos dias tiene el mes
+	 * @param month El numero del mes
+	 * @param number Numero de dias del mes
+	 * 
+	 * 
+	 */
 	public int dayOfMonth(int month){
-
 		int number =0;
+		System.out.println("Escriba el numero del mes del que quiere saber los dias: ");
+		month=Teclado.readInteger();
 		switch(month){
 				case 1: //next
 				case 3: //next
@@ -100,19 +107,26 @@ public class Date {
 						number=30;
 						break;
 		}
+		System.out.println("El mes tiene " + number + " dias");
 		return number;
 	}
-
+	/**
+	 * Metodo que compara los años y dice si es el mismo
+	 */
 	public boolean isSameYear(Date anotherDate){
-
+	System.out.println("Escriba la fecha que quiere comparar con la fecha de hoy: ");
+	
 		if(this.year==anotherDate.getYear()){
 			return true;
 		}
 		else{
 			return false;
 		}
-	}
 
+	}
+	/**
+	 * Metodo que compara dos fechas y te dice si es el mismo mes
+	 */
 	public boolean isSameMonth(Date anotherDate){
 
 		if(this.month==anotherDate.getMonth()){
@@ -122,7 +136,9 @@ public class Date {
 			return false;
 		}
 	}
-
+	/**
+ 	* Metodo que compara dos fechas y te dice si es el mismo dia
+ 	*/
 	public boolean isSameDay(Date anotherDate){
 
 		if(this.day==anotherDate.getDay()){
@@ -132,7 +148,9 @@ public class Date {
 			return false;
 		}
 	}
-
+	/**
+	 * Metodo que compara dos fechas y te dice si es la misma fecha
+	 */
 	public boolean isSame(Date anotherDate){
 
 		if(this.day==anotherDate.getDay() && this.month==anotherDate.getMonth() && this.year==anotherDate.getYear()){
@@ -142,55 +160,64 @@ public class Date {
 			return false;
 		}
 	}
-
+	/**
+	 * Metodo que introduciendo el numero de mes, te indica que mes es con letra
+	 * @param namemonth Nombre del mes
+	 * @param month Numero del mes
+	 */
 	public String nameOfMonth(){
-
+		System.out.println("Escriba el numero de mes del que quiere saber el nombre: ");
+		month=Teclado.readInteger();
 			String namemonth="";
 			switch(month){
 				case 1: 
-					namemonth= "Enero";
+					namemonth= "enero";
 					break;
 				case 2: 
-					namemonth= "Febrero";
+					namemonth= "febrero";
 					break;
 				case 3: 
-					namemonth= "Marzo";
+					namemonth= "marzo";
 					break;
 				case 4: 
-					namemonth= "Abril";
+					namemonth= "abril";
 					break;
 				case 5: 
-					namemonth= "Mayo";
+					namemonth= "mayo";
 					break;
 				case 6: 
-					namemonth= "Junio";
+					namemonth= "junio";
 					break;
 				case 7: 
-					namemonth= "Julio";
+					namemonth= "julio";
 					break;
 				case 8: 
-					namemonth= "Agosto";
+					namemonth= "agosto";
 					break;
 				case 9: 
-					namemonth= "Septiembre";
+					namemonth= "septiembre";
 					break;
 				case 10: 
-					namemonth= "Octubre";
+					namemonth= "octubre";
 					break;
 				case 11: 
-					namemonth= "Noviembre";
+					namemonth= "noviembre";
 					break;
 				case 12: 
-					namemonth= "Diciembre";
+					namemonth= "diciembre";
 					break;
 			}
+		System.out.println("El mes" + month + "es:" + namemonth);
 
 	return namemonth;
 	}
-
+	/**
+	 * Metodo en el que escribes un dia para un mes y te dice si es verdadero o falso
+	 * @param rigth Dice si el numero de dias es correcto o no
+	 */
 	public boolean isDayRight(){
-
-		boolean right=false;
+		
+		boolean rigth=false;
 			switch(month){
 				case 1: //next
 				case 3: //next
@@ -200,18 +227,18 @@ public class Date {
 				case 10: //next
 				case 12:
 					if(day<1 || day>31){
-						right=false;
+						rigth=false;
 					}
 					else{
-						right=true;
+				rigth=true;
 					}
 					break;
 				case 2: 
 					if(day<1 || day>28){
-						right=false;
+				rigth=false;
 					}
 					else{
-						right=true;
+				rigth=true;
 					}
 					break;
 				case 4: //next
@@ -219,18 +246,22 @@ public class Date {
 				case 9: //next
 				case 11:
 					if(day<1 || day>30){
-						right=false;
+				rigth=false;
 					}
 					else{
-						right=true;
+				rigth=true;
 				}
 					break;
 		}
-		return right;
+		return rigth;
 	}
-
+	/**
+	 * Metodo con el que escribes un mes y te dice a que estacion pertenece
+	 * @param season nombre de la estacion
+	 */
 	public String seasonOfThisMonth(){
-
+		System.out.println("Escriba el mes del que quiere saber la estacion: ");
+		month=Teclado.readInteger();
 		String season="";
 			switch(month){
 				case 12: //next
@@ -254,12 +285,16 @@ public class Date {
 					season="Otoño";
 					break;
 			}
-
+			System.out.println("La estacion es: " + season);
 		return season;
 	}
-
+	/**
+	 * Metodo que te dice cuantos meses quedan para que se acabe el año desde el mes introducido
+	 * @param left meses que quedan para que se acabe el año
+	 */
 	public int monthleft(){
-
+		System.out.println("Escriba el mes del que quiere saber cuantos meses quedan hasta final de año: ");
+		month=Teclado.readInteger();
 		int left=0;
 		switch(left){
 		case 1:
@@ -299,10 +334,13 @@ public class Date {
 			left=0;
 			break;
 		}
-	
+	System.out.println("Quedan " + left + " meses hasta fin de año");
 	return left;
 	}
-
+	/**
+	 * Metodo que te dice cuantos dias quedan para que se acabe el mes
+	 * @param message mensaje que te dice los dias que faltan para que se acabe el mes
+	 */
 	public void Dateleft(){
 		int i;
 		String message= "";
@@ -312,10 +350,14 @@ public class Date {
 		}
 
 	}
-
+	/**
+	 * Metodo que te dice que meses tienen los mismos dias que el mes introducido
+	 * @param months parametro que te dice los meses que tienen los mismos dias que el mes introducido
+	 */
 	public String monthSameDays(){
 		String months="";
-
+		System.out.println("Escriba el mes del que quiere saber los meses con los mismos dias: ");
+		month=Teclado.readInteger();
 		switch(month){
 			case 1:
 				months="Marzo, Mayo, Julio, Agosto, Octubre, Diciembre";
@@ -352,7 +394,19 @@ public class Date {
 				break;
 
 		}
+		System.out.println("El mes tiene los mismos dias que: " + months);
 		return months;
 	}
+
+	public void daysSinceFirstDay (){
+		int i;
+		String mensaje= "";
+		for(i=this.day; i>dayOfMonth(month); i++){
+			mensaje= i+"/" + month + "/" + year;
+			System.out.println(mensaje+"\n");
+		}
+
+	}
+
 
 }
