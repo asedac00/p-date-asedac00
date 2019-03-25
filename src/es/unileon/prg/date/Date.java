@@ -21,7 +21,7 @@ public class Date {
 			this.month = month;
 		}
 
-		if(day < 1 || day > dayOfMonth(month)){
+		if(day < 1 || day > dayOfMonth()){
 			throw new DateException("Dia " + day + " no valido" +
 					" Valores posibles entre 1 y 31");
 		} else {
@@ -80,13 +80,12 @@ public class Date {
 	 * Metodo que te dice cuantos dias tiene el mes
 	 * @param month El numero del mes
 	 * @param number Numero de dias del mes
+	 * @return devulve le parametro number
 	 * 
 	 * 
 	 */
-	public int dayOfMonth(int month){
+	public int dayOfMonth(){
 		int number =0;
-		System.out.println("Escriba el numero del mes del que quiere saber los dias: ");
-		month=Teclado.readInteger();
 		switch(month){
 				case 1: //next
 				case 3: //next
@@ -107,14 +106,13 @@ public class Date {
 						number=30;
 						break;
 		}
-		System.out.println("El mes tiene " + number + " dias");
 		return number;
 	}
 	/**
 	 * Metodo que compara los años y dice si es el mismo
+	 * @return devuelve true o false dependiendo de si el año es el mismo o no
 	 */
 	public boolean isSameYear(Date anotherDate){
-	System.out.println("Escriba la fecha que quiere comparar con la fecha de hoy: ");
 	
 		if(this.year==anotherDate.getYear()){
 			return true;
@@ -126,6 +124,7 @@ public class Date {
 	}
 	/**
 	 * Metodo que compara dos fechas y te dice si es el mismo mes
+	 * @return  devuelve true o false dependiendo de si el mes es el mismo o no
 	 */
 	public boolean isSameMonth(Date anotherDate){
 
@@ -137,7 +136,8 @@ public class Date {
 		}
 	}
 	/**
- 	* Metodo que compara dos fechas y te dice si es el mismo dia
+	 * Metodo que compara dos fechas y te dice si es el mismo dia
+	 * @return  devuelve true o false dependiendo de si el dia es el mismo o no
  	*/
 	public boolean isSameDay(Date anotherDate){
 
@@ -150,6 +150,7 @@ public class Date {
 	}
 	/**
 	 * Metodo que compara dos fechas y te dice si es la misma fecha
+	 * @return  devuelve true o false dependiendo de si la fecha es la misma o no
 	 */
 	public boolean isSame(Date anotherDate){
 
@@ -164,10 +165,9 @@ public class Date {
 	 * Metodo que introduciendo el numero de mes, te indica que mes es con letra
 	 * @param namemonth Nombre del mes
 	 * @param month Numero del mes
+	 * @return devuelve el nombre del mes
 	 */
-	public String nameOfMonth(){
-		System.out.println("Escriba el numero de mes del que quiere saber el nombre: ");
-		month=Teclado.readInteger();
+	public String monthName(){
 			String namemonth="";
 			switch(month){
 				case 1: 
@@ -207,61 +207,52 @@ public class Date {
 					namemonth= "diciembre";
 					break;
 			}
-		System.out.println("El mes" + month + "es:" + namemonth);
 
 	return namemonth;
 	}
 	/**
 	 * Metodo en el que escribes un dia para un mes y te dice si es verdadero o falso
 	 * @param rigth Dice si el numero de dias es correcto o no
+	 * @return devuelve el parametro rigth
 	 */
 	public boolean isDayRight(){
-		
-		boolean rigth=false;
-			switch(month){
-				case 1: //next
-				case 3: //next
-				case 5: //next
-				case 7: //next
-				case 8: //next
-				case 10: //next
-				case 12:
-					if(day<1 || day>31){
-						rigth=false;
-					}
-					else{
-				rigth=true;
-					}
-					break;
-				case 2: 
-					if(day<1 || day>28){
-				rigth=false;
-					}
-					else{
-				rigth=true;
-					}
-					break;
-				case 4: //next
-				case 6: //next
-				case 9: //next
-				case 11:
-					if(day<1 || day>30){
-				rigth=false;
-					}
-					else{
-				rigth=true;
-				}
-					break;
-		}
-		return rigth;
+        boolean right=true;
+        switch(month){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                if(day<1||day>31){
+                    right=false;
+                }
+            break;
+
+            case 2:
+                if(day<1||day>28){
+                    right=false;
+                }
+            break;
+
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                if(day<1||day>30){
+                    right=false;
+                }
+            break;            
+        }
+
+        return right;
 	}
 	/**
 	 * Metodo con el que escribes un mes y te dice a que estacion pertenece
 	 * @param season nombre de la estacion
 	 */
-	public String seasonOfThisMonth(){
-		System.out.println("Escriba el mes del que quiere saber la estacion: ");
-		month=Teclado.readInteger();
+	public String seasonOfMonth(){
 		String season="";
 			switch(month){
 				case 12: //next
@@ -285,16 +276,14 @@ public class Date {
 					season="Otoño";
 					break;
 			}
-			System.out.println("La estacion es: " + season);
 		return season;
 	}
 	/**
-	 * Metodo que te dice cuantos meses quedan para que se acabe el año desde el mes introducido
+	 * Metodo que calcula cuantos meses quedan para que se acabe el año desde el mes introducido
 	 * @param left meses que quedan para que se acabe el año
+	 * @return devuelve el numero de meses que quedan para que se acabe el año
 	 */
 	public int monthleft(){
-		System.out.println("Escriba el mes del que quiere saber cuantos meses quedan hasta final de año: ");
-		month=Teclado.readInteger();
 		int left=0;
 		switch(left){
 		case 1:
@@ -334,17 +323,16 @@ public class Date {
 			left=0;
 			break;
 		}
-	System.out.println("Quedan " + left + " meses hasta fin de año");
 	return left;
 	}
 	/**
 	 * Metodo que te dice cuantos dias quedan para que se acabe el mes
 	 * @param message mensaje que te dice los dias que faltan para que se acabe el mes
 	 */
-	public void Dateleft(){
+	public void isDateleft(){
 		int i;
 		String message= "";
-		for(i=this.day; i<dayOfMonth(month); i++){
+		for(i=this.day; i<dayOfMonth(); i++){
 				message= i+"/" + month + "/" + year;
 				System.out.println(message+"\n");
 		}
@@ -353,11 +341,10 @@ public class Date {
 	/**
 	 * Metodo que te dice que meses tienen los mismos dias que el mes introducido
 	 * @param months parametro que te dice los meses que tienen los mismos dias que el mes introducido
+	 * @return devuelve los meses que tienen el mismo numero de dias que le introducido
 	 */
-	public String monthSameDays(){
+	public String ismonthSameDays(){
 		String months="";
-		System.out.println("Escriba el mes del que quiere saber los meses con los mismos dias: ");
-		month=Teclado.readInteger();
 		switch(month){
 			case 1:
 				months="Marzo, Mayo, Julio, Agosto, Octubre, Diciembre";
@@ -394,19 +381,100 @@ public class Date {
 				break;
 
 		}
-		System.out.println("El mes tiene los mismos dias que: " + months);
 		return months;
 	}
-
-	public void daysSinceFirstDay (){
-		int i;
-		String mensaje= "";
-		for(i=this.day; i>dayOfMonth(month); i++){
-			mensaje= i+"/" + month + "/" + year;
-			System.out.println(mensaje+"\n");
+	/**
+	 * Metodo que cuenta los dias desde el primer dia del año
+	 * @param dias dice cuantos dias tiene de cada mes
+	 * @param suma suma los dias, desde el primer dia del año hasta la fecha anterior
+	 * @return devuelve la suma de los dias, desde el primer dia del año hasta el dia anterior
+	 */
+	public int numberOfDays(){
+		int i, days, suma;
+		suma=0;
+		for(i=1;i<=getMonth()-1;i++){
+			if(i==2){
+				days=28;
+				suma=suma+days;
+			} else 
+			if(i==4 || i==6 || i==9 || i==11) {
+				days=30;
+				suma=suma+days;
+			}
+			else {
+				days=31;
+				suma=suma+days;
+			} 
 		}
-
+		suma=suma+getDay()-1;
+		return suma;
 	}
-
-
+	/**
+	 * Metodo que calcula el numero de intentos para crear una fecha aleatoria con un while
+	 * @param day parametro con el que se calculan los dias
+	 * @param month parametro con el que se calculan los meses 
+	 * @return i devuelve el numero de intentos
+	 */
+	public int randomDate(){
+		int day,mes,i;
+		i=0;
+		day=0;
+		mes=0;
+		while(day!=getDay() && mes!=getMonth()){
+			day=(int)(Math.random()*31)+1;
+			mes=(int)(Math.random()*12)+1;
+			i++;
+		}
+		return i;
+	}
+	/**
+	 * Metodo que calcula el numero de intentos para crear una fecha aleatoria con un do-while
+	 * @param day parametro con el que se calculan los dias
+	 * @param month parametro con el que se calculan los meses 
+	 * @return i devuelve el numero de intentos
+	 */
+	public int doRandomDate(){
+		int day,mes,i;
+		i=0;
+		day=0;
+		mes=0;
+		do{
+			day=(int)(Math.random()*31)+1;
+			mes=(int)(Math.random()*12)+1;
+			i++;
+		} while(day!=getDay() && mes!=getMonth());
+		return i;
+	}
+	/**
+	 * Metodo que, metiendo una fecha te devuelve el dia de la semana que es
+	 * @param dia dia de la semana
+	 * @return devuelve el dia de la semana
+	 */
+	public String dayOfWeek(){
+		String dia="";
+		switch((numberOfDays()+1)%7){
+			case 1:
+				dia="Lunes";
+				break;
+			case 2:
+				dia="Martes";
+				break;
+			case 3:
+				dia="Miércoles";
+				break;
+			case 4:
+				dia="Jueves";
+				break;
+			case 5:
+				dia="Viernes";
+				break;
+			case 6:
+				dia="Sábado";
+				break;
+			case 7:
+				dia="Domingo";
+				break;
+		}
+		return dia.toString();
+	}
 }
