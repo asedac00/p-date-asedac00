@@ -1,221 +1,332 @@
-package es.unileon.prg.date;
+package es.unileon.prg1.date;
 
 
 /**
- * Clase con los  ejercicios
- * 	@author Ana Sedano Cañas
- * 	@version inicial
+ * Clase realizada a partir de los ejercicios propuestos en las diapositivas.
+ * @author Iván Sánchez Revuelta
+ * @version Inicial
+ *   
  */
-public class Date {
 
-	private int day;
-	private int month;
-	private int year;
+ public class Date{
+/**
+ * Atributo que establece el día
+ */
+    private int day;
 
-	public Date(int day, int month, int year) throws DateException{
-		this.year = year;
-		if (month < 1 || month > 12) {
-			throw new DateException("Mes " + month + " no valido" +
-					" Valores posibles entre 1 y 12.");
-		} else {
-			this.month = month;
-		}
+/**
+ * Atributo que establece el mes
+ */
+    private int month;
 
-		if(day < 1 || day > dayOfMonth()){
-			throw new DateException("Dia " + day + " no valido" +
-					" Valores posibles entre 1 y 31");
-		} else {
-			this.day = day;
+/**
+ * Atributo que establece el año
+ */
+    private int year;
+/**
+ * Constructor de la clase Date que crea un día con los atributos day,month,year
+ * @param day Establece el día
+ * @param month Establece el mes
+ * @param year Establece el año
+ * @throws DateException Lanza la excepción de fecha
+ */
+public Date(int day, int month, int year) throws DateException{
+	if(year<1) {
+    	throw new DateException("Año " + year + " no valido" +
+                " Valores posibles mayores que 1.");
+    }else {
+    	this.year = year;
+    }    
+	if (month < 1 || month > 12) {
+        throw new DateException("Mes " + month + " no valido" +
+                " Valores posibles entre 1 y 12.");
+    } else {
+        this.month = month;
+    }
+    if(day<1 || day>daysOfMonth()){
+        throw new DateException("Día "+day+"no válido " +
+                "Valores posibles entre 1 y 31.");
+    }else{
+        this.day=day;
+    }
+}
 
-		}
-	}
+/**
+ * Constructor de la clase Date que crea un día manualmente
+ */
+public Date() {
+	 this.year = 2017;
+	 this.month = 1;
+	 this.day=1;
 
-	@Override
-	public String toString() {
-		return this.day + "/" + this.month + "/" + this.year;
-	}
+}
 
-	/**
-	 * @return the day
-	 */
-	public int getDay() {
-		return day;
-	}
-
-	/**
-	 * @param day the day to set
-	 */
-	public void setday(int day) {
-		this.day = day;
-	}
-
-	/**
-	 * @return the month
-	 */
-	public int getMonth() {
-		return month;
-	}
-
-	/**
-	 * @param month the month to set
-	 */
-	public void setMonth(int month) {
-		this.month = month;
-	}
-
-	/**
-	 * @return the year
-	 */
-	public int getYear() {
-		return year;
-	}
-
-	/**
-	 * @param year the year to set
-	 */
-	public void setYear(int year) {
-		this.year = year;
-	}
-	/**
-	 * Metodo que te dice cuantos dias tiene el mes
-	 * @param month El numero del mes
-	 * @param number Numero de dias del mes
-	 * @return devulve le parametro number
-	 * 
-	 * 
-	 */
-	public int dayOfMonth(){
-		int number =0;
-		switch(month){
-				case 1: //next
-				case 3: //next
-				case 5: //next
-				case 7: //next
-				case 8: //next
-				case 10: //next
-				case 12:
-					number=31;
-					break;
-				case 2: 
-					number=28;
-					break;
-				case 4: //next
-				case 6: //next
-				case 9: //next
-				case 11:
-						number=30;
-						break;
-		}
-		return number;
-	}
-	/**
-	 * Metodo que compara los años y dice si es el mismo
-	 * @return devuelve true o false dependiendo de si el año es el mismo o no
-	 */
-	public boolean isSameYear(Date anotherDate){
 	
-		if(this.year==anotherDate.getYear()){
-			return true;
-		}
-		else{
-			return false;
-		}
+/**
+ * Copia del constructor que crea el objeto Date today
+ * @param today Una fecha
+ */
+public Date(Date today) {
+	this.year = today.year;
+    this.month = today.month;
+    this.day=today.month;
+}
 
-	}
-	/**
-	 * Metodo que compara dos fechas y te dice si es el mismo mes
-	 * @return  devuelve true o false dependiendo de si el mes es el mismo o no
-	 */
-	public boolean isSameMonth(Date anotherDate){
 
-		if(this.month==anotherDate.getMonth()){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	/**
-	 * Metodo que compara dos fechas y te dice si es el mismo dia
-	 * @return  devuelve true o false dependiendo de si el dia es el mismo o no
- 	*/
-	public boolean isSameDay(Date anotherDate){
 
-		if(this.day==anotherDate.getDay()){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	/**
-	 * Metodo que compara dos fechas y te dice si es la misma fecha
-	 * @return  devuelve true o false dependiendo de si la fecha es la misma o no
-	 */
-	public boolean isSame(Date anotherDate){
+/**
+ * Método que imprime la fecha dada
+ */
+@Override
+public String toString() {
+    return this.day + "/" + this.month + "/" + this.year;
+}
 
-		if(this.day==anotherDate.getDay() && this.month==anotherDate.getMonth() && this.year==anotherDate.getYear()){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	/**
-	 * Metodo que introduciendo el numero de mes, te indica que mes es con letra
-	 * @param namemonth Nombre del mes
-	 * @param month Numero del mes
-	 * @return devuelve el nombre del mes
-	 */
-	public String monthName(){
-			String namemonth="";
-			switch(month){
-				case 1: 
-					namemonth= "enero";
-					break;
-				case 2: 
-					namemonth= "febrero";
-					break;
-				case 3: 
-					namemonth= "marzo";
-					break;
-				case 4: 
-					namemonth= "abril";
-					break;
-				case 5: 
-					namemonth= "mayo";
-					break;
-				case 6: 
-					namemonth= "junio";
-					break;
-				case 7: 
-					namemonth= "julio";
-					break;
-				case 8: 
-					namemonth= "agosto";
-					break;
-				case 9: 
-					namemonth= "septiembre";
-					break;
-				case 10: 
-					namemonth= "octubre";
-					break;
-				case 11: 
-					namemonth= "noviembre";
-					break;
-				case 12: 
-					namemonth= "diciembre";
-					break;
-			}
 
-	return namemonth;
-	}
-	/**
-	 * Metodo en el que escribes un dia para un mes y te dice si es verdadero o falso
-	 * @param rigth Dice si el numero de dias es correcto o no
-	 * @return devuelve el parametro rigth
-	 */
-	public boolean isDayRight(){
+/**
+ * Método que nos autoriza a utilizar el atributo year
+ * @return Devuelve el año 
+ */
+    public int getYear(){
+        return year;
+    }
+
+/**
+ * Método que nos autoriza a usar el atributo month
+ * @return Devuelve el mes
+ */
+    public int getMonth(){
+        return month;
+    }
+
+/**
+ * Método que nos autoriza a usar el atributo day
+ * @return Devuelve el día
+ */
+    public int getDay(){
+        return day;
+    }
+
+  /**
+     * Método que establece el día    
+     * @param d El día
+ * @throws DateException 
+     */
+    public void setDay(int d) throws DateException {
+        if(d<1||d>daysOfMonth()) {
+        	throw new DateException("Dia " + d + " no valido" +
+                    " Valores posibles entre 1 y 31.");
+        }else {
+        	this.day = d;
+        }
+    }
+
+    /**
+     * Método que establece el mes
+     * @param m El mes a establecer
+     * @throws DateException 
+     */
+    public void setMonth(int m) throws DateException {
+    	if(m<1||m>12) {
+        	throw new DateException("Mes " + m + " no valido" +
+                    " Valores posibles entre 1 y 12.");
+        }else {
+        	this.month = m;
+        }    }
+
+    /**
+     * Método que establece el año
+     * @param y El año a establecer
+     * @throws DateException 
+     */
+    public void setYear(int y) throws DateException  {
+    	if(y<1) {
+        	throw new DateException("Año" + y + " no valido" +
+                    " Valores posibles mayores que 0.");
+        }else {
+        	this.year = y;
+        }    }
+/**
+ * Método que nos devuelve el resultado de comparar el año de las fechas dadas
+ * @return Devuelve true en caso de ser igual y false en caso de ser distintas
+ * @param anotherDate Otra fecha
+ */
+
+    public boolean isSameYear(Date anotherDate){
+        if(this.year==anotherDate.getYear()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+/**
+ * Método que nos devueve el resultado de comparar el mes de las fechas dadas
+ * @return Devuelve true en caso de ser igual y false en caso de ser distintas
+ * @param anotherDate Otra fecha
+ */
+    public boolean isSameMonth(Date anotherDate){
+        if(this.month==anotherDate.getMonth()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+/**
+ * Método que nos devuelve el resultado de comparar el día de las fechas dadas
+ * @return Devuelve true en caso de ser igual y false en caso de ser distintos
+ * @param anotherDate Otra fecha
+ */
+    public boolean isSameDay(Date anotherDate){
+        if(this.day==anotherDate.getDay()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+ /**
+  * Método que nos devuelve el resultado de comparar las dos fechas completas
+  * @return Devuelve true en caso de ser igual y false en caso de ser distintas
+  * @param anotherDate Otra fecha
+  */
+    public boolean isSame(Date anotherDate){
+        if(this.year==anotherDate.getYear()&&this.day==anotherDate.getDay()&&this.month==anotherDate.getMonth()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+/**
+* Método que imprime el nombre del mes
+* @return Devuelve el nombre del mes
+*/
+
+   public String getMonthName(){
+        String nombreMes="";
+
+       switch(month){
+        case 1:
+            nombreMes="January";
+        break;
+        case 2:
+            nombreMes="February";
+        break;
+        case 3:
+            nombreMes="March";
+        break;
+        case 4:
+            nombreMes="April";
+        break;
+        case 5:
+            nombreMes="May";
+        break;
+        case 6:
+            nombreMes="June";
+        break;
+        case 7:
+            nombreMes="July";
+        break;
+        case 8:
+            nombreMes="August";
+        break;
+        case 9:
+            nombreMes="September";
+        break;
+        case 10:
+            nombreMes="October";
+        break;
+        case 11:
+            nombreMes="November";
+        break;
+        case 12:
+            nombreMes="December";
+        break;
+        
+               	
+    }
+    return nombreMes.toString();
+    
+
+    }
+
+/**
+ * Método que adjunta una estación a un mes
+ * @return Devuelve el nombre de la estación a la que corresponde cada mes
+ */
+   public String getSeasonName(){
+
+        String season="";
+
+        switch(month){
+            case 12:
+            case 1:
+            case 2:
+                season="Winter";
+            break;
+            
+            case 3:
+            case 4:
+            case 5:
+                season="Spring";
+            break;
+
+            case 6:
+            case 7:
+            case 8:
+                season="Summer";
+            break;
+            
+            case 9:
+            case 10:
+            case 11:
+                season="Autumn";
+            break;
+        }
+        return season.toString();
+    }
+/**
+ * Método que establece el número de días que tiene cada año
+ * @return Devuelve el número de días de cada mes
+ * @param month Número del mes
+ */
+    public int daysOfMonth(){
+        int number=0;
+
+        switch(month){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                number=31;
+            break;
+
+            case 2:
+                number=28;
+            break;
+
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                number=30;
+            break;            
+        }
+
+        return number;
+
+    }
+
+/**
+ * Método que comprueba que el número de días es correcto
+ * @return Devuelve true si el número de días es correcto y false si no
+ */
+    public boolean isDayRight(){
         boolean right=true;
         switch(month){
             case 1:
@@ -247,234 +358,187 @@ public class Date {
         }
 
         return right;
-	}
-	/**
-	 * Metodo con el que escribes un mes y te dice a que estacion pertenece
-	 * @param season nombre de la estacion
-	 */
-	public String seasonOfMonth(){
-		String season="";
-			switch(month){
-				case 12: //next
-				case 1: //next
-				case 2: 
-					season="Invierno";
-					break;
-				case 3: //next
-				case 4: //next 
-				case 5:
-					season= "Primavera";
-					break;
-				case 6: //next
-				case 7: //next
-				case 8: //next
-					season= "Verano";
-					break;
-				case 9: //next
-				case 10: //next
-				case 11:
-					season="Otoño";
-					break;
-			}
-		return season;
-	}
-	/**
-	 * Metodo que calcula cuantos meses quedan para que se acabe el año desde el mes introducido
-	 * @param left meses que quedan para que se acabe el año
-	 * @return devuelve el numero de meses que quedan para que se acabe el año
-	 */
-	public int monthleft(){
-		int left=0;
-		switch(left){
-		case 1:
-			left=11;
-			break;
-		case 2:
-			left=10;
-			break;
-		case 3:
-			left= 9;
-			break;
-		case 4:
-			left= 8;
-			break;
-		case 5:
-			left=7;
-			break;
-		case 6:
-			left=6;
-			break;
-		case 7:
-			left=5;
-			break;
-		case 8:
-			left=4;
-			break;
-		case 9:
-			left=3;
-			break;
-		case 10:
-			left=2;
-			break;
-		case 11:
-			left=1;
-			break;
-		case 12:
-			left=0;
-			break;
+    }
+/**
+ * Método que imprime las fechas hasta final de mes
+ * @return Devuelve los meses que faltan hasta final de mes
+ *
+ */
+    public String getDaysLeftOfMonth() throws DateException{
+    	StringBuilder monthsLeft = new StringBuilder();
+    		
+    	for (int i = this.day+1; i <= this.daysOfMonth(); i++){
+    		monthsLeft=monthsLeft.append(i+"/"+this.month+"/"+this.year+" ");
 		}
-	return left;
-	}
-	/**
-	 * Metodo que te dice cuantos dias quedan para que se acabe el mes
-	 * @param message mensaje que te dice los dias que faltan para que se acabe el mes
-	 */
-	public void isDateleft(){
-		int i;
-		String message= "";
-		for(i=this.day; i<dayOfMonth(); i++){
-				message= i+"/" + month + "/" + year;
-				System.out.println(message+"\n");
-		}
+    	return monthsLeft.toString();
+    }
 
-	}
-	/**
-	 * Metodo que te dice que meses tienen los mismos dias que el mes introducido
-	 * @param months parametro que te dice los meses que tienen los mismos dias que el mes introducido
-	 * @return devuelve los meses que tienen el mismo numero de dias que le introducido
-	 */
-	public String ismonthSameDays(){
-		String months="";
-		switch(month){
-			case 1:
-				months="Marzo, Mayo, Julio, Agosto, Octubre, Diciembre";
-				break;
-			case 2:
-				months="Ninguno";
-				break;
-			case 3:
-				months="Enero, Mayo, Julio, Agosto, Octubre, Diciembre";
-				break;
-			case 4:
-				months="Julio, Septiembre, Noviembre";
-				break;
-			case 5:
-				months="Enero, Marzo, Julio, Agosto, Octubre, Diciembre";
-				break;
-			case 6:
-				months="Abril, Septiembre, Noviembre";
-				break;
-			case 7:
-				months="Enero, Marzo, Mayo, Agosto, Octubre, Diciembre";
-				break;
-			case 8:
-				months="Abril, Julio, Noviembre";
-				break;
-			case 10:
-				months="Enero, Marzo, Mayo, Agosto, Octubre, Diciembre";
-				break;
-			case 11:
-				months="Abril, Julio, Septiembre";
-				break;
-			case 12:
-				months="Enero, Marzo, Mayo,Julio, Agosto, Octubre";
-				break;
+/**
+ * Método que calcula el número de meses que quedan para que acabe el año
+ * @return Devuelve el número de meses que quedan hasta diciembre
+ * @throws DateException 
+ */
+    public String getMonthsLeft() throws DateException{
+    	StringBuilder month=new StringBuilder();
+    	int i;
+    	Date aux=new Date(this);
+    	for(i=(this.month)+1;i<=12;i++) {
+    		aux.setMonth(i);
+    		month.append(aux.getMonthName()+" ");
+    		
+    	}
+        
+    	return month.toString();
 
-		}
-		return months;
-	}
-	/**
-	 * Metodo que cuenta los dias desde el primer dia del año
-	 * @param dias dice cuantos dias tiene de cada mes
-	 * @param suma suma los dias, desde el primer dia del año hasta la fecha anterior
-	 * @return devuelve la suma de los dias, desde el primer dia del año hasta el dia anterior
-	 */
-	public int numberOfDays(){
-		int i, days, suma;
-		suma=0;
-		for(i=1;i<=getMonth()-1;i++){
-			if(i==2){
-				days=28;
-				suma=suma+days;
-			} else 
-			if(i==4 || i==6 || i==9 || i==11) {
-				days=30;
-				suma=suma+days;
+    }
+
+/**
+     * Método que busca los meses que tiene los mismos días que la fecha dada
+     * @return Devuelve el nombre de los meses que tienen los mismos días
+ * @throws DateException 
+     */
+
+    public String getMonthsSameDays() throws DateException{
+        StringBuilder month=new StringBuilder();
+        int i;
+        Date aux=new Date(this);
+        for(i=1;i<=12;i++){
+        	aux.setMonth(i);
+        	if(aux.daysOfMonth()==this.daysOfMonth()) {
+        		month.append(aux.getMonthName()+" ");
+        	}
+        }
+        return month.toString();
+    }
+/**
+ * Método que calcula el numero de veces que son necesarias para conseguir que una fecha aleatoria sea igual a una fecha dada
+ * @return Devuelve el número de intentos necesarios
+ */
+    public int numRandomTriesEqualDate(){
+        int i=0,j=0,tries=0;
+        while(i!=day && j!=month){
+            i=(int) (Math.random()*12)+1;
+            j=(int)(Math.random()*31)+1;
+            tries+=1;
+        }
+
+        return tries;
+    }
+
+
+/**
+ * Método que calcula el dia siguiente 
+ * @return Devuelve el dia siguiente
+ */
+public Date tomorrow() {
+	Date tomorrow = null;
+	int day,month,year;
+	
+	try {
+		tomorrow=new Date(this);
+		day=getDay();
+		month=getMonth();
+		year=getYear();
+		
+		day++;
+		if(day>tomorrow.daysOfMonth()) {
+			day=1;
+			month++;
+			if(month>12) {
+				month=1;
+				year++;
 			}
-			else {
-				days=31;
-				suma=suma+days;
-			} 
 		}
-		suma=suma+getDay()-1;
-		return suma;
+		tomorrow=new Date(day,month,year);
 	}
-	/**
-	 * Metodo que calcula el numero de intentos para crear una fecha aleatoria con un while
-	 * @param day parametro con el que se calculan los dias
-	 * @param month parametro con el que se calculan los meses 
-	 * @return i devuelve el numero de intentos
-	 */
-	public int randomDate(){
-		int day,mes,i;
-		i=0;
-		day=0;
-		mes=0;
-		while(day!=getDay() && mes!=getMonth()){
-			day=(int)(Math.random()*31)+1;
-			mes=(int)(Math.random()*12)+1;
-			i++;
-		}
-		return i;
+	catch(DateException e) {
+		System.out.println(e.getMessage());
 	}
-	/**
-	 * Metodo que calcula el numero de intentos para crear una fecha aleatoria con un do-while
-	 * @param day parametro con el que se calculan los dias
-	 * @param month parametro con el que se calculan los meses 
-	 * @return i devuelve el numero de intentos
-	 */
-	public int doRandomDate(){
-		int day,mes,i;
-		i=0;
-		day=0;
-		mes=0;
-		do{
-			day=(int)(Math.random()*31)+1;
-			mes=(int)(Math.random()*12)+1;
-			i++;
-		} while(day!=getDay() && mes!=getMonth());
-		return i;
-	}
-	/**
-	 * Metodo que, metiendo una fecha te devuelve el dia de la semana que es
-	 * @param dia dia de la semana
-	 * @return devuelve el dia de la semana
-	 */
-	public String dayOfWeek(){
-		String dia="";
-		switch((numberOfDays()+1)%7){
-			case 1:
-				dia="Lunes";
-				break;
-			case 2:
-				dia="Martes";
-				break;
-			case 3:
-				dia="Miércoles";
-				break;
-			case 4:
-				dia="Jueves";
-				break;
-			case 5:
-				dia="Viernes";
-				break;
-			case 6:
-				dia="Sábado";
-				break;
-			case 7:
-				dia="Domingo";
-				break;
-		}
-		return dia.toString();
-	}
+		
+	return tomorrow;
 }
+
+/**
+ * Método que calcula el número de días que han pasado desde una fecha
+ * @return Devuelve el número de días que han pasado
+ */
+public int daysPast() {
+	int i,days,past=0;
+	
+	for(i=1;i<=getMonth()-1;i++) {
+		if(i==2) {
+			days=28;
+			past=past+days;
+		}else {
+			if(i==4||i==6||i==9||i==11) {
+				days=30;
+				past=past+days;
+			}else {
+				days=31;
+				past=past+days;
+			}
+		}
+	
+	
+	}
+	past=past+getDay()-1;
+	return past;
+}
+
+/**
+ * Método que calcula el día de la semana que es cierta fecha
+ * @return Día de la semana
+ */
+public String dayOfWeek(int firstOfJanuary) {
+	String dia="";
+	
+	switch((daysPast()%7)+firstOfJanuary) {
+	
+		case 1:
+			dia="Monday";
+		break;
+		
+		case 2:
+			dia="Tuesday";
+		break;
+		
+		case 3:
+			dia="Wednesday";
+		break;
+		
+		case 4:
+			dia="Thursday";
+		break;
+		
+		case 5:
+			dia="Friday";
+		break;
+		
+		case 6:
+			dia="Saturday";
+		break;
+		
+		case 7:
+			dia="Sunday";
+		break;	
+	}
+	return dia.toString();
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+ 

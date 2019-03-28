@@ -5,7 +5,7 @@ package es.unileon.prg1.date;
  * @version inicial 
  * @author Ana Sedano Cañas
  */
-@SuppressWarnings("serial)
+
 public class DateException extends Exception {
 	/**
 	 * Mensaje que advierte de un error

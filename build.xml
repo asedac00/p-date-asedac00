@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<project name="class date" basedir="." default="todo">
+    <property name="src" value="src"/>
+    <property name="classes" value="classes"/>
+    <property name="conf" value="etc"/>
+    <property name="doc" value="doc"/>
+
+    <property name="paquetes" value="es.unileon.prg.date"/>
+    <property name="titulo" value="class date"/>
+
+    <target name="clean">
+      <delete dir="${classes}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+      <mkdir dir="${classes}"/>
+      <javac includeantruntime="false" srcdir="${src}" destdir="${classes}"/>
+      <echo message="Compiling...done"/>
+    </target>
+
+    <target name="run" depends="compile">
+      <java classname="es.unileon.prg.date.MainDate">
+         <classpath>
+              <pathelement path="${classes}"/>
+         </classpath>
+      </java>
+	</target>
+	<target name="doc">
+      		<mkdir dir="${doc}"/>
+      		<javadoc sourcepath="${src}" classpath="${classes}"
+         		packagenames="${paquetes}"
+         		destdir="${doc}"
+        		verbose="false" author="true"
+         		access="private" splitindex="true" 				version="true"
+         		windowtitle="${titulo}" doctitle="${titulo}"/>
+    	</target>
+
+    <target name="todo" depends="doc, run"/>
+
+</project>
+
+
